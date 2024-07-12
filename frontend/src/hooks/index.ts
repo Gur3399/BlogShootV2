@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState} from "react";
 import { BACKEND_URL } from "../config";
-import BlogCard from "../components/BlogCard";
+
 
 export interface Blog{
     content:string,
     title:string,
-    id:string,
-    author:{
+    id:string ,
+    "author":{
         name:string
     }
 }

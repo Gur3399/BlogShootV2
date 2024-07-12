@@ -21,7 +21,9 @@ const AppBar = () => {
       
         </div>
         <div className='flex flex-row gap-4'>
-        <button className='bg-white text-black  rounded-full px-3 border border-slate-500 font-bold hover:bg-black hover:text-white hover:border-none hover:' >+ Publish</button>
+        <Link to={"/publish"} >
+            <button className='bg-white text-black  rounded-full px-3 border border-slate-500 font-bold hover:bg-black hover:text-white hover:border-none hover:' >+ Publish</button>
+        </Link>
         <Avatar />
 
         </div>

@@ -11,14 +11,18 @@ const Fullpage = ({blog}:{blog:Blog}) => {
        
         <div className='grid grid-cols-12   px-14 pt-12 '>
         <div className='col-span-8 '>
-                <div className='text-6xl font-extrabold'>
+            <div className='overflow-hidden'>
+            <div className='text-6xl font-extrabold'>
                         {blog.title}
                         
                </div>
+
+            </div>
+                
                <div className='text-slate-500 pt-2'>
                     {`Posted on ${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`}
                </div>
-               <div className='flex justify-center pb-2'>
+               <div className='flex  pb-2 '>
                     <p>{blog.content}</p>
                </div>
         </div>
