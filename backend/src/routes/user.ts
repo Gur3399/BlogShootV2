@@ -16,21 +16,26 @@ export const userRouter = new Hono<{
 
 userRouter.post("/signup", async (c)=>{
    //initialize prisma with accelerate
+   console.log("debug called");
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
   
   
     const body = await c.req.json();
-    const {success} = signUpSchema.safeParse(body);
+    const success = signUpSchema.safeParse(body);
+    console.log(body);
     if(!success){
       c.status(411);
-      return c.json({message:"Invalid Inputs"});
+      return c.json({message:"parsing failed at zod"});
     }
-  
+    
   try{
+    const nameD = body.name === "null" ? "Anonymous":body.name;
+    console.log(nameD);
     const user =  await prisma.user.create({
       data:{
+        name:nameD,
         email: body.email,
         password: body.password,
       }
@@ -42,20 +47,15 @@ userRouter.post("/signup", async (c)=>{
   
   }
   catch(e){
-    if(e === 'P2002')
-    {
-      return c.text('user alraedy exists');
-    }
-    else{
-      return c.json({msg:'something went wrong',
-                    error:e} );
-    }
+    c.status(411);
+        return c.json({
+          msg:"userAlready exists!"});  
   }
    
   
    
   
-   
+  
     
   })
 userRouter.post("/signin", async(c)=>{
